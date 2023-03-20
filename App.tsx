@@ -5,7 +5,7 @@ import { Colors } from '@styles/colors';
 export default function App() {
     return (
         <View style={styles.wrapper}>
-            <Text>Open up App.js to start working on your app!</Text>
+            <Text>hello</Text>
         </View>
     );
 }
