@@ -81,10 +81,17 @@ module.exports = {
                 selector: 'variable',
                 types: ['boolean'],
                 format: ['PascalCase'],
-                prefix: ['is', 'should', 'has', 'can', 'did', 'will'],
+                prefix: ['is', 'should', 'has', 'can', 'did', 'will', 'are'],
             },
         ],
-        'key-spacing': ['error', { beforeColon: false, afterColon: true, mode: 'strict' }],
+        'key-spacing': [
+            'error',
+            {
+                beforeColon: false,
+                afterColon: true,
+                mode: 'strict',
+            },
+        ],
 
         // easy-to-read-and-refactor syntax
         'dot-notation': 'error',
@@ -94,9 +101,24 @@ module.exports = {
         'react-native/no-inline-styles': 'warn',
         'react-native/no-color-literals': 'warn',
         'function-paren-newline': ['error', 'consistent'],
-        'no-else-return': ['error', { allowElseIf: false }],
-        'import/order': ['warn', { warnOnUnassignedImports: true }],
-        '@typescript-eslint/no-shadow': ['error', { hoist: 'never' }],
+        'no-else-return': [
+            'error',
+            {
+                allowElseIf: false,
+            },
+        ],
+        'import/order': [
+            'warn',
+            {
+                warnOnUnassignedImports: true,
+            },
+        ],
+        '@typescript-eslint/no-shadow': [
+            'error',
+            {
+                hoist: 'never',
+            },
+        ],
 
         // code security enhancing syntax
         'default-case': 'error',
@@ -108,7 +130,12 @@ module.exports = {
         'no-empty': 'warn',
         'react-native/no-unused-styles': 'warn',
         'unused-imports/no-unused-imports': 'error',
-        'import/no-unused-modules': [1, { missingExports: true }],
+        'import/no-unused-modules': [
+            1,
+            {
+                missingExports: true,
+            },
+        ],
 
         // hindering and useless syntax
         'no-shadow': 'off',
@@ -130,8 +157,8 @@ module.exports = {
         '@typescript-eslint/no-use-before-define': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
-
-        // prettier config
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-misused-promises': 'off',
         'prettier/prettier': [
             'error',
             {
