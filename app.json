@@ -22,7 +22,7 @@
         "foregroundImage": "./src/assets/app/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.MakeSense"
+      "package": "com.xenous.makesense"
     },
     "web": {
       "favicon": "./src/assets/app/favicon.png"
