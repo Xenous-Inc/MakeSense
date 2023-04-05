@@ -16,7 +16,9 @@
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.3",
+    "react-native-figma-squircle": "^0.3.3",
     "react-native-logs": "^5.0.1",
+    "react-native-svg": "13.4.0",
     "requireindex": "^1.2.0",
     "typescript": "^4.9.4"
   },
