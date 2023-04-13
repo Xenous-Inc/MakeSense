@@ -1,48 +1,43 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { SquircleView } from 'react-native-figma-squircle';
-import { ITask } from 'src/models/note';
+import { ITask } from 'src/models/task';
 
 export interface ITaskCardProps {
-    note: ITask;
+    task: ITask;
+    firsSubTaskColor: string;
+    secondSubTaskColor: string;
+    taskCardColor: string;
+    cardBordersColor: string;
+    cardShadowColor: string;
 }
 
 export const TaskCard: React.FC<ITaskCardProps> = props => {
-    const {
-        title,
-        text,
-        taskCardColor,
-        firsSubTaskColor,
-        secondSubTaskColor,
-        folder,
-        time,
-        cardBordersColor,
-        cardShadowColor,
-        isCompleted,
-    } = props.note;
+    const { title, text, folder, time, isCompleted } = props.task;
     const icon = {
         emptyIcon: require('@assets/icons/not-marked-icon.png'),
         notEmptyIcon: require('@assets/icons/marked-icon.png'),
     };
-    const [isFinished, isUnfinished] = useState(isCompleted);
+    const [isFinished, setIsFinished] = useState(isCompleted);
     return (
         <>
             <SquircleView
                 style={
-                    (styles.content__secondtSubTask, { borderColor: cardBordersColor, shadowColor: cardShadowColor })
+                    (styles.backgroundElement__second,
+                    { borderColor: props.cardBordersColor, shadowColor: props.cardShadowColor })
                 }
                 squircleParams={{
                     cornerSmoothing: 0.7,
                     cornerRadius: 32,
-                    fillColor: secondSubTaskColor,
+                    fillColor: props.secondSubTaskColor,
                 }}
             />
             <SquircleView
-                style={styles.content__firstSubTask}
+                style={styles.backgroundElement__first}
                 squircleParams={{
                     cornerSmoothing: 0.7,
                     cornerRadius: 32,
-                    fillColor: firsSubTaskColor,
+                    fillColor: props.firsSubTaskColor,
                 }}
             />
             <SquircleView
@@ -50,16 +45,16 @@ export const TaskCard: React.FC<ITaskCardProps> = props => {
                 squircleParams={{
                     cornerSmoothing: 0.7,
                     cornerRadius: 40,
-                    fillColor: taskCardColor,
+                    fillColor: props.taskCardColor,
                 }}
             >
-                <TouchableOpacity onPress={() => isUnfinished(!isFinished)}>
+                <TouchableOpacity onPress={() => setIsFinished(!isCompleted)}>
                     <Image source={!isFinished ? icon.notEmptyIcon : icon.emptyIcon} style={styles.content__icon} />
                 </TouchableOpacity>
                 <View style={styles.content__textComponents}>
-                    <Text style={styles.content__textComponents__title}>{title}</Text>
-                    <Text style={styles.content__textComponents__text}>{text}</Text>
-                    <Text style={styles.content__textComponents__folderAndTime}>
+                    <Text style={styles.textComponents__title}>{title}</Text>
+                    <Text style={styles.textComponents__text}>{text}</Text>
+                    <Text style={styles.textComponents__folderAndTime}>
                         `${folder} ${time}`
                     </Text>
                 </View>
@@ -84,20 +79,20 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         top: 14,
     },
-    content__textComponents__title: {
+    textComponents__title: {
         width: 247,
         height: 28,
         fontFamily: 'OnestMedium',
         fontSize: 22,
     },
-    content__textComponents__text: {
+    textComponents__text: {
         width: 247,
         height: 82,
         fontFamily: 'OnestRegular',
         fontSize: 15,
         opacity: 0.5,
     },
-    content__textComponents__folderAndTime: {
+    textComponents__folderAndTime: {
         fontFamily: 'OnestMedium',
         fontSize: 13,
         opacity: 0.5,
@@ -108,13 +103,13 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         top: 10,
     },
-    content__firstSubTask: {
+    backgroundElement__first: {
         width: 295,
         height: 50,
         opacity: 0.4,
         top: 185,
     },
-    content__secondtSubTask: {
+    backgroundElement__second: {
         width: 262,
         height: 50,
         opacity: 0.3,
