@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Colors } from '@styles/colors';
+import { TaskCard } from '@components/TaskCard';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,7 +26,24 @@ export default function App() {
         return null;
     }
 
-    return <View style={styles.wrapper} onLayout={onLayoutRootView} />;
+    return (
+        <View style={styles.wrapper} onLayout={onLayoutRootView}>
+            <TaskCard
+                task={{
+                    isCompleted: false,
+                    title: 'hello',
+                    text: 'd;asmd',
+                    folder: 'food',
+                    time: '12:20',
+                }}
+                firstBackgroundElementColor={Colors.GRAY}
+                secondBackgroundElementColor={Colors.GRAY}
+                taskCardColor={Colors.GRAY}
+                cardBordersColor={Colors.GRAY}
+                cardShadowColor={Colors.GRAY}
+            />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

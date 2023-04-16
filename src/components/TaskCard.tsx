@@ -5,89 +5,100 @@ import { ITask } from 'src/models/task';
 
 export interface ITaskCardProps {
     task: ITask;
-    firsSubTaskColor: string;
-    secondSubTaskColor: string;
+    firstBackgroundElementColor: string;
+    secondBackgroundElementColor: string;
     taskCardColor: string;
     cardBordersColor: string;
     cardShadowColor: string;
 }
 
 export const TaskCard: React.FC<ITaskCardProps> = props => {
-    const { title, text, folder, time, isCompleted } = props.task;
+    const {
+        task,
+        firstBackgroundElementColor,
+        secondBackgroundElementColor,
+        taskCardColor,
+        cardBordersColor,
+        cardShadowColor,
+    } = props;
     const icon = {
-        emptyIcon: require('@assets/icons/not-marked-icon.png'),
-        notEmptyIcon: require('@assets/icons/marked-icon.png'),
+        empty: require('@assets/icons/not-marked-icon.png'),
+        notEmpty: require('@assets/icons/marked-icon.png'),
     };
-    const [isFinished, setIsFinished] = useState(isCompleted);
+    const [isCompleted, setIsCompleted] = useState(task.isCompleted);
     return (
-        <>
+        <View style={styles.wrapper}>
             <SquircleView
-                style={
-                    (styles.backgroundElement__second,
-                    { borderColor: props.cardBordersColor, shadowColor: props.cardShadowColor })
-                }
-                squircleParams={{
-                    cornerSmoothing: 0.7,
-                    cornerRadius: 32,
-                    fillColor: props.secondSubTaskColor,
-                }}
-            />
-            <SquircleView
-                style={styles.backgroundElement__first}
-                squircleParams={{
-                    cornerSmoothing: 0.7,
-                    cornerRadius: 32,
-                    fillColor: props.firsSubTaskColor,
-                }}
-            />
-            <SquircleView
-                style={styles.content}
+                style={styles.wrapper__content}
                 squircleParams={{
                     cornerSmoothing: 0.7,
                     cornerRadius: 40,
-                    fillColor: props.taskCardColor,
+                    fillColor: taskCardColor,
                 }}
             >
-                <TouchableOpacity onPress={() => setIsFinished(!isCompleted)}>
-                    <Image source={!isFinished ? icon.notEmptyIcon : icon.emptyIcon} style={styles.content__icon} />
+                <TouchableOpacity onPress={() => setIsCompleted(!isCompleted)}>
+                    <Image source={!isCompleted ? icon.notEmpty : icon.empty} style={styles.content__icon} />
                 </TouchableOpacity>
                 <View style={styles.content__textComponents}>
-                    <Text style={styles.textComponents__title}>{title}</Text>
-                    <Text style={styles.textComponents__text}>{text}</Text>
+                    <Text style={styles.textComponents__title}>{task.title}</Text>
+                    <Text style={styles.textComponents__text}>{task.text}</Text>
                     <Text style={styles.textComponents__folderAndTime}>
-                        `${folder} ${time}`
+                        `${task.folder} ${task.time}`
                     </Text>
                 </View>
             </SquircleView>
-        </>
+            <View style={styles.wrapper__background}>
+                <SquircleView
+                    style={(styles.background__second, { borderColor: cardBordersColor, shadowColor: cardShadowColor })}
+                    squircleParams={{
+                        cornerSmoothing: 0.7,
+                        cornerRadius: 32,
+                        fillColor: 'red',
+                    }}
+                />
+                <SquircleView
+                    style={styles.background__first}
+                    squircleParams={{
+                        cornerSmoothing: 0.7,
+                        cornerRadius: 32,
+                        fillColor: firstBackgroundElementColor,
+                    }}
+                />
+            </View>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    content: {
+    wrapper: {
         width: '100%',
+        marginHorizontal: 20,
+        overflow: 'visible',
+    },
+    wrapper__content: {
+        width: '100%',
+        height: 'auto',
         borderWidth: 0.5,
         borderRadius: 40,
         flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-evenly',
+        alignItems: 'stretch',
         opacity: 0.9,
         elevation: 20,
+        padding: 12,
+        gap: 12,
+        minHeight: 120,
     },
     content__textComponents: {
         alignItems: 'flex-start',
         justifyContent: 'space-evenly',
-        top: 14,
     },
     textComponents__title: {
-        width: 247,
-        height: 28,
+        width: '100%',
         fontFamily: 'OnestMedium',
         fontSize: 22,
     },
     textComponents__text: {
-        width: 247,
-        height: 82,
+        width: '100%',
         fontFamily: 'OnestRegular',
         fontSize: 15,
         opacity: 0.5,
@@ -101,18 +112,23 @@ const styles = StyleSheet.create({
         width: 36,
         height: 36,
         alignSelf: 'flex-start',
-        top: 10,
     },
-    backgroundElement__first: {
-        width: 295,
+    wrapper__background: {
+        position: 'relative',
+        overflow: 'visible',
+    },
+    background__first: {
+        width: '90%',
+        position: 'absolute',
         height: 50,
         opacity: 0.4,
-        top: 185,
+        top: 0,
     },
-    backgroundElement__second: {
-        width: 262,
+    background__second: {
+        width: '80%',
+        position: 'absolute',
         height: 50,
         opacity: 0.3,
-        top: 250,
+        top: 50,
     },
 });
