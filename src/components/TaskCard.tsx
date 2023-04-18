@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ViewStyle, StyleProp } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ViewStyle, StyleProp, LayoutChangeEvent } from 'react-native';
 import { SquircleView } from 'react-native-figma-squircle';
 import { Colors } from '@styles/colors';
 import { ITask } from 'src/models/task';
@@ -19,10 +19,14 @@ export const TaskCard: React.FC<ITaskCardProps> = props => {
     };
 
     const [isCompleted, setIsCompleted] = useState(task.isCompleted);
+    const [cardWidth, setCardWidth] = useState<number | undefined>(undefined);
+
+    const onWrapperLayout = useCallback((event: LayoutChangeEvent) => setCardWidth(event.nativeEvent.layout.width), []);
 
     return (
-        <View style={[styles.wrapper, style]}>
+        <View style={[styles.wrapper, style]} onLayout={onWrapperLayout}>
             <SquircleView
+                onLayout={onWrapperLayout}
                 style={styles.wrapper__content}
                 squircleParams={{
                     cornerSmoothing: 1,
@@ -45,6 +49,18 @@ export const TaskCard: React.FC<ITaskCardProps> = props => {
                     </Text>
                     <Text style={styles.text__meta}>{`${task.folder} ${task.time}`}</Text>
                 </View>
+                {cardWidth && (
+                    <View
+                        style={[
+                            styles.content__shadow,
+                            {
+                                borderRadius: cardWidth / 2,
+                                bottom: -cardWidth + 56,
+                                shadowColor: color,
+                            },
+                        ]}
+                    />
+                )}
             </SquircleView>
             <View style={styles.wrapper__background}>
                 <SquircleView
@@ -73,6 +89,8 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     wrapper__content: {
+        position: 'relative',
+        overflow: 'hidden',
         flexDirection: 'row',
         elevation: 20,
         padding: 18,
@@ -106,6 +124,14 @@ const styles = StyleSheet.create({
     content__icon: {
         width: 36,
         height: 36,
+    },
+    content__shadow: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        aspectRatio: 1,
+        opacity: 0.9,
+        elevation: 24,
     },
     wrapper__background: {
         position: 'relative',
