@@ -1,67 +1,66 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ViewStyle, StyleProp } from 'react-native';
 import { SquircleView } from 'react-native-figma-squircle';
+import { Colors } from '@styles/colors';
 import { ITask } from 'src/models/task';
 
 export interface ITaskCardProps {
     task: ITask;
-    firstBackgroundElementColor: string;
-    secondBackgroundElementColor: string;
-    taskCardColor: string;
-    cardBordersColor: string;
-    cardShadowColor: string;
+    style?: StyleProp<ViewStyle>;
+    color: string;
 }
 
 export const TaskCard: React.FC<ITaskCardProps> = props => {
-    const {
-        task,
-        firstBackgroundElementColor,
-        secondBackgroundElementColor,
-        taskCardColor,
-        cardBordersColor,
-        cardShadowColor,
-    } = props;
+    const { task, style, color } = props;
+
     const icon = {
         empty: require('@assets/icons/not-marked-icon.png'),
-        notEmpty: require('@assets/icons/marked-icon.png'),
+        completed: require('@assets/icons/marked-icon.png'),
     };
+
     const [isCompleted, setIsCompleted] = useState(task.isCompleted);
+
     return (
-        <View style={styles.wrapper}>
+        <View style={[styles.wrapper, style]}>
             <SquircleView
                 style={styles.wrapper__content}
                 squircleParams={{
-                    cornerSmoothing: 0.7,
-                    cornerRadius: 40,
-                    fillColor: taskCardColor,
+                    cornerSmoothing: 1,
+                    cornerRadius: 32,
+                    fillColor: Colors.WHITE,
+                    strokeColor: color,
+                    strokeWidth: 1,
                 }}
             >
                 <TouchableOpacity onPress={() => setIsCompleted(!isCompleted)}>
-                    <Image source={!isCompleted ? icon.notEmpty : icon.empty} style={styles.content__icon} />
+                    <Image
+                        source={!isCompleted ? icon.completed : icon.empty}
+                        style={[styles.content__icon, { tintColor: color }]}
+                    />
                 </TouchableOpacity>
-                <View style={styles.content__textComponents}>
-                    <Text style={styles.textComponents__title}>{task.title}</Text>
-                    <Text style={styles.textComponents__text}>{task.text}</Text>
-                    <Text style={styles.textComponents__folderAndTime}>
-                        `${task.folder} ${task.time}`
+                <View style={styles.content__text}>
+                    <Text style={styles.text__title}>{task.title}</Text>
+                    <Text style={styles.text__message} textBreakStrategy={'balanced'} numberOfLines={3}>
+                        {task.text}
                     </Text>
+                    <Text style={styles.text__meta}>{`${task.folder} ${task.time}`}</Text>
                 </View>
             </SquircleView>
             <View style={styles.wrapper__background}>
                 <SquircleView
-                    style={(styles.background__second, { borderColor: cardBordersColor, shadowColor: cardShadowColor })}
+                    style={styles.background__first}
                     squircleParams={{
-                        cornerSmoothing: 0.7,
-                        cornerRadius: 32,
-                        fillColor: 'red',
+                        cornerSmoothing: 1,
+                        cornerRadius: 24,
+                        fillColor: color,
                     }}
                 />
                 <SquircleView
-                    style={styles.background__first}
+                    style={[styles.background__second]}
                     squircleParams={{
-                        cornerSmoothing: 0.7,
-                        cornerRadius: 32,
-                        fillColor: firstBackgroundElementColor,
+                        cornerSmoothing: 1,
+                        cornerRadius: 24,
+                        fillColor: color,
                     }}
                 />
             </View>
@@ -72,63 +71,59 @@ export const TaskCard: React.FC<ITaskCardProps> = props => {
 const styles = StyleSheet.create({
     wrapper: {
         width: '100%',
-        marginHorizontal: 20,
-        overflow: 'visible',
     },
     wrapper__content: {
-        width: '100%',
-        height: 'auto',
-        borderWidth: 0.5,
-        borderRadius: 40,
         flexDirection: 'row',
-        alignItems: 'stretch',
-        opacity: 0.9,
         elevation: 20,
-        padding: 12,
+        padding: 18,
         gap: 12,
-        minHeight: 120,
+        zIndex: 10,
     },
-    content__textComponents: {
-        alignItems: 'flex-start',
-        justifyContent: 'space-evenly',
+    content__text: {
+        flex: 1,
+        alignItems: 'stretch',
     },
-    textComponents__title: {
-        width: '100%',
+    text__title: {
         fontFamily: 'OnestMedium',
         fontSize: 22,
+        color: Colors.BLACK,
+        opacity: 0.9,
     },
-    textComponents__text: {
-        width: '100%',
+    text__message: {
+        marginTop: 8,
         fontFamily: 'OnestRegular',
         fontSize: 15,
+        color: Colors.BLACK,
         opacity: 0.5,
     },
-    textComponents__folderAndTime: {
+    text__meta: {
+        marginTop: 16,
         fontFamily: 'OnestMedium',
         fontSize: 13,
+        color: Colors.BLACK,
         opacity: 0.5,
     },
     content__icon: {
         width: 36,
         height: 36,
-        alignSelf: 'flex-start',
     },
     wrapper__background: {
         position: 'relative',
-        overflow: 'visible',
     },
     background__first: {
-        width: '90%',
         position: 'absolute',
         height: 50,
-        opacity: 0.4,
-        top: 0,
+        left: 16,
+        top: -38,
+        right: 16,
+        opacity: 0.2,
     },
     background__second: {
-        width: '80%',
         position: 'absolute',
         height: 50,
-        opacity: 0.3,
-        top: 50,
+        left: 32,
+        top: -26,
+        right: 32,
+        opacity: 0.1,
     },
 });
