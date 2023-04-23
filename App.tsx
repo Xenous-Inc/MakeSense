@@ -31,7 +31,7 @@ export default function App() {
                 task={{
                     isCompleted: false,
                     title: 'Pack for the trip',
-                    text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
+                    text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
                     folder: 'Journeys',
                     time: '21:30',
                 }}
@@ -41,7 +41,7 @@ export default function App() {
                 task={{
                     isCompleted: false,
                     title: 'Pack for the trip',
-                    text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
+                    text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
                     folder: 'Journeys',
                     time: '21:30',
                 }}
