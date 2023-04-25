@@ -15,7 +15,7 @@ export default function App() {
         DisplayMedium: require('@assets/fonts/SFProDisplayMedium.otf'),
         DisplayRegular: require('@assets/fonts/SFProDisplayRegular.otf'),
     });
-
+    //a
     const onLayoutRootView = useCallback(async () => {
         if (areFontsLoaded) {
             await SplashScreen.hideAsync();
