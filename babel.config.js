@@ -7,6 +7,7 @@ module.exports = function (api) {
         plugins: [
             ["module-resolver", {}], // get rid of error
             setModuleResolverPluginForTsConfig(), // auto set alias from tsconfig
+            'react-native-reanimated/plugin',
         ]
     };
 };

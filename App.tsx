@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { TaskCard } from '@components/TaskCard';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { BottomSheetCalendar } from '@components/BottomSheetCalendar';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,33 +27,15 @@ export default function App() {
     }
 
     return (
-        <View style={styles.wrapper} onLayout={onLayoutRootView}>
-            <TaskCard
-                task={{
-                    isCompleted: false,
-                    title: 'Pack for the trip',
-                    text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
-                    folder: 'Journeys',
-                    time: '21:30',
-                }}
-                color={'#50C3FF'}
-            />
-            <TaskCard
-                task={{
-                    isCompleted: false,
-                    title: 'Pack for the trip',
-                    text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
-                    folder: 'Journeys',
-                    time: '21:30',
-                }}
-                color={'#5CFF63'}
-            />
-        </View>
+        <GestureHandlerRootView style={styles.wrapper} onLayout={onLayoutRootView}>
+            <BottomSheetCalendar />
+        </GestureHandlerRootView>
     );
 }
 
 const styles = StyleSheet.create({
     wrapper: {
+        backgroundColor: 'gray',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
