@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { TaskCard } from '@components/TaskCard';
+import HomeScreen from '@screens/HomeScreen';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,26 +27,7 @@ export default function App() {
 
     return (
         <View style={styles.wrapper} onLayout={onLayoutRootView}>
-            <TaskCard
-                task={{
-                    isCompleted: false,
-                    title: 'Pack for the trip',
-                    text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
-                    folder: 'Journeys',
-                    time: '21:30',
-                }}
-                color={'#50C3FF'}
-            />
-            <TaskCard
-                task={{
-                    isCompleted: false,
-                    title: 'Pack for the trip',
-                    text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
-                    folder: 'Journeys',
-                    time: '21:30',
-                }}
-                color={'#5CFF63'}
-            />
+            <HomeScreen />
         </View>
     );
 }
@@ -54,9 +35,6 @@ export default function App() {
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 48,
-        padding: 16,
+        padding: 15,
     },
 });
