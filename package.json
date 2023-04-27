@@ -16,6 +16,7 @@
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.6",
+    "react-native-calendars": "^1.1295.0",
     "react-native-figma-squircle": "^0.3.3",
     "react-native-gesture-handler": "~2.9.0",
     "react-native-logs": "^5.0.1",
