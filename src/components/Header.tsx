@@ -3,8 +3,8 @@ import { Image, Pressable, StyleSheet, View } from 'react-native';
 import { Colors } from '@styles/colors';
 
 export interface IHeader {
-    onMenuClick: () => void;
-    onCalendarClick: () => void;
+    onMenuClick?: () => void;
+    onCalendarClick?: () => void;
 }
 
 export const Header: React.FC<IHeader> = props => {
@@ -24,7 +24,6 @@ export const Header: React.FC<IHeader> = props => {
 const styles = StyleSheet.create({
     wrapper: {
         width: '100%',
-        height: '100%',
         backgroundColor: Colors.WHITE,
         display: 'flex',
         flexDirection: 'row',
