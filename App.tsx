@@ -30,8 +30,11 @@ export default function App() {
     }
     return (
         <GestureHandlerRootView style={styles.wrapper} onLayout={onLayoutRootView}>
-            <Header onCalendarClick={() => setIsButtomSheetOpened(current => !current)} />
-            <BottomSheetCalendar indexPos={isButtomSheetOpened} />
+            <Header onCalendarClick={() => setIsButtomSheetOpened(true)} />
+            <BottomSheetCalendar
+                isBottomSheetOpen={isButtomSheetOpened}
+                setIsBottomSheetOpen={setIsButtomSheetOpened}
+            />
         </GestureHandlerRootView>
     );
 }
