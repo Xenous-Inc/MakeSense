@@ -1,24 +1,18 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { CalendarHeaderProps } from 'react-native-calendars/src/calendar/header';
 import { MONTHS, WEEKDAYS } from '@utils/constants';
 import { Colors } from '@styles/colors';
 
 export interface ICalendarHeaderProps extends CalendarHeaderProps {
-    isBottomSheetOpen: boolean;
-    setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
+    onClose?: () => void;
 }
 
 const CalendarHeader: React.FC<ICalendarHeaderProps> = props => {
-    const { month, addMonth, theme, isBottomSheetOpen, setIsBottomSheetOpen } = props;
+    const { month, addMonth, theme, onClose } = props;
 
     const currentMonth = month?.getMonth() || 0;
 
-    /*useEffect(() => {
-        if (isBottomSheetOpen) bottomSheetRef.current?.snapToIndex(0);
-    }, [isBottomSheetOpen]);*/
-
-    //const style = useRef(styleConstructor(theme));
     return (
         //
         <>
@@ -40,7 +34,7 @@ const CalendarHeader: React.FC<ICalendarHeaderProps> = props => {
                         />
                     </Pressable>
                 </View>
-                <Pressable style={styles.content__closePressable}>
+                <Pressable onPress={onClose} style={styles.content__closePressable}>
                     <Image
                         style={styles.content__closeImg}
                         source={require('@assets/icons/calendar-cancel3x-icon.png')}

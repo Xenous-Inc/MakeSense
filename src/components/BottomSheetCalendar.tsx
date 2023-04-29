@@ -1,8 +1,8 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Calendar } from 'react-native-calendars';
-import CalendarHeader from './molecules/CalendarHeader';
+import CalendarHeader, { ICalendarHeaderProps } from './molecules/CalendarHeader';
 import { Colors } from '@styles/colors';
 
 export interface IBottomSheetCalendarProps {
@@ -10,27 +10,6 @@ export interface IBottomSheetCalendarProps {
     setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
 }
 export const BottomSheetCalendar: React.FC<IBottomSheetCalendarProps> = props => {
-    /* LocaleConfig.locales.en = {
-        monthNames: [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December',
-        ],
-        monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        dayNamesShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-        today: 'Today',
-    };
-    LocaleConfig.defaultLocale = 'en';*/
     const { isBottomSheetOpen, setIsBottomSheetOpen } = props;
     const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -47,6 +26,22 @@ export const BottomSheetCalendar: React.FC<IBottomSheetCalendarProps> = props =>
         },
     ).format(CURRENT_DATE)}-${Intl.DateTimeFormat('en', { day: '2-digit' }).format(CURRENT_DATE)}`;
 
+    const renderHeader = useCallback(
+        (prop: ICalendarHeaderProps) => {
+            return (
+                <CalendarHeader
+                    {...prop}
+                    onClose={() => {
+                        console.log(bottomSheetRef.current);
+                        setIsBottomSheetOpen(false);
+                        bottomSheetRef.current?.close();
+                    }}
+                />
+            );
+        },
+        [bottomSheetRef.current],
+    );
+
     return (
         <BottomSheet
             ref={bottomSheetRef}
@@ -60,7 +55,7 @@ export const BottomSheetCalendar: React.FC<IBottomSheetCalendarProps> = props =>
         >
             <Calendar
                 hideDayNames={false}
-                customHeader={CalendarHeader}
+                customHeader={renderHeader}
                 theme={{
                     arrowColor: '#000',
                     textDayFontWeight: 'bold',
@@ -77,10 +72,10 @@ export const BottomSheetCalendar: React.FC<IBottomSheetCalendarProps> = props =>
                             },
                             text: {
                                 position: 'absolute',
-                                left: -4,
-                                right: -4,
-                                top: -4,
-                                bottom: -4,
+                                left: -6,
+                                right: -6,
+                                top: -6,
+                                bottom: -6,
                                 width: 'auto',
                                 height: 'auto',
                                 backgroundColor: Colors.BLACK,
