@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { CalendarHeaderProps } from 'react-native-calendars/src/calendar/header';
 import { MONTHS, WEEKDAYS } from '@utils/constants';
 import { Colors } from '@styles/colors';
 
-export interface ICalendarHeaderProps extends CalendarHeaderProps {}
+export interface ICalendarHeaderProps extends CalendarHeaderProps {
+    isBottomSheetOpen: boolean;
+    setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
+}
 
 const CalendarHeader: React.FC<ICalendarHeaderProps> = props => {
-    const { month, addMonth, theme } = props;
+    const { month, addMonth, theme, isBottomSheetOpen, setIsBottomSheetOpen } = props;
 
     const currentMonth = month?.getMonth() || 0;
+
+    /*useEffect(() => {
+        if (isBottomSheetOpen) bottomSheetRef.current?.snapToIndex(0);
+    }, [isBottomSheetOpen]);*/
 
     //const style = useRef(styleConstructor(theme));
     return (
@@ -33,7 +40,7 @@ const CalendarHeader: React.FC<ICalendarHeaderProps> = props => {
                         />
                     </Pressable>
                 </View>
-                <Pressable>
+                <Pressable style={styles.content__closePressable}>
                     <Image
                         style={styles.content__closeImg}
                         source={require('@assets/icons/calendar-cancel3x-icon.png')}
@@ -59,7 +66,7 @@ const styles = StyleSheet.create({
     },
     content__date: {
         flexDirection: 'row',
-        marginTop: 10,
+        marginTop: 19,
         marginBottom: 17,
         alignItems: 'center',
         paddingHorizontal: 20,
@@ -73,11 +80,19 @@ const styles = StyleSheet.create({
         height: 40,
         width: 38,
     },
+    content__closePressable: {
+        height: 30,
+        width: 30,
+        borderRadius: 25,
+        backgroundColor: '#f5f5f5',
+        justifyContent: 'center',
+        alignItems: 'center',
+        top: 20,
+        right: 20,
+    },
     content__closeImg: {
         height: 10,
         width: 10,
-        top: 20,
-        right: 20,
     },
     week: {
         marginTop: 7,
