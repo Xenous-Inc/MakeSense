@@ -13,8 +13,8 @@ const imageButton = {
 
 const HomeScreen: React.FC = () => {
     return (
-        <View>
-            <View style={styles.header}>
+        <View style={styles.wrapper}>
+            <View style={styles.wrapper__header}>
                 <Header />
             </View>
             <TaskCard
@@ -37,12 +37,12 @@ const HomeScreen: React.FC = () => {
                 }}
                 color={'#5CFF63'}
             />
-            <View style={styles.container}>
-                <TouchableOpacity style={styles.plus_button}>
-                    <Image style={styles.image_buttons} source={imageButton.voiceOutLine} />
+            <View style={styles.wrapper__content}>
+                <TouchableOpacity style={styles.content__plusButton}>
+                    <Image style={styles.img} source={imageButton.voiceOutLine} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.voice_button}>
-                    <Image style={styles.image_buttons} source={imageButton.iconPlus} />
+                <TouchableOpacity style={styles.content__voiceButton}>
+                    <Image style={styles.img} source={imageButton.iconPlus} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -50,11 +50,23 @@ const HomeScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-    image_buttons: {
-        width: 36,
-        height: 36,
+    wrapper: {
+        flex: 1,
     },
-    plus_button: {
+    wrapper__content: {
+        width: '100%',
+        height: '200%',
+        flex: 5,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: '90%',
+    },
+    wrapper__header: {
+        width: '100%',
+        height: '10%',
+        marginTop: '10%',
+    },
+    content__plusButton: {
         backgroundColor: Colors.BLACK,
         borderRadius: 100,
         width: '30%',
@@ -63,7 +75,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         right: 8,
     },
-    voice_button: {
+    content__voiceButton: {
         backgroundColor: Colors.BLACK,
         borderRadius: 100,
         left: 8,
@@ -72,18 +84,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    container: {
-        width: '100%',
-        height: '200%',
-        flex: 5,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: '90%',
-    },
-    header: {
-        width: '100%',
-        height: '10%',
-        marginTop: '10%',
+    img: {
+        width: 36,
+        height: 36,
     },
 });
 
