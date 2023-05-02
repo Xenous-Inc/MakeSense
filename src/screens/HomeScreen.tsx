@@ -5,7 +5,7 @@ import { Colors } from '@styles/colors';
 import { Header } from '@components/Header';
 
 const imageButton = {
-    voiceOutLine: require('@assets/icons/voice_outline_24.png'),
+    voiceOutline: require('@assets/icons/voice_outline_24.png'),
     iconPlus: require('@assets/icons/add_24.png'),
     iconMenu: require('@assets/icons/menu-icon.png'),
     iconCalendar: require('@assets/icons/calendar-icon.png'),
