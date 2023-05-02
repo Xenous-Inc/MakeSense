@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -30,6 +30,7 @@ export default function App() {
     }
     return (
         <GestureHandlerRootView style={styles.wrapper} onLayout={onLayoutRootView}>
+            <View style={styles.safeArea} />
             <Header onCalendarClick={() => setIsButtomSheetOpened(true)} />
             <BottomSheetCalendar
                 isBottomSheetOpen={isButtomSheetOpened}
@@ -41,9 +42,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
     wrapper: {
-        paddingTop: 40,
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'flex-start',
+    },
+    safeArea: {
+        marginTop: 40,
     },
 });

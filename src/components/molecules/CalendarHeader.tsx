@@ -36,15 +36,15 @@ const CalendarHeader: React.FC<ICalendarHeaderProps> = props => {
                 </View>
                 <Pressable onPress={onClose} style={styles.content__closePressable}>
                     <Image
-                        style={styles.content__closeImg}
+                        style={styles.closePressable__closeImg}
                         source={require('@assets/icons/calendar-cancel3x-icon.png')}
                     />
                 </Pressable>
             </View>
 
-            <View style={styles.week}>
+            <View style={styles.weekContent}>
                 {WEEKDAYS.map((day, index) => (
-                    <Text key={index} style={styles.dayHeader}>
+                    <Text key={index} style={styles.weekContent__dayHeader}>
                         {day}
                     </Text>
                 ))}
@@ -78,22 +78,22 @@ const styles = StyleSheet.create({
         height: 30,
         width: 30,
         borderRadius: 25,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: Colors.FADED_WHITE,
         justifyContent: 'center',
         alignItems: 'center',
         top: 20,
         right: 20,
     },
-    content__closeImg: {
+    closePressable__closeImg: {
         height: 10,
         width: 10,
     },
-    week: {
+    weekContent: {
         marginTop: 7,
         flexDirection: 'row',
         justifyContent: 'space-around',
     },
-    dayHeader: {
+    weekContent__dayHeader: {
         marginTop: 2,
         marginBottom: 7,
         width: 32,
