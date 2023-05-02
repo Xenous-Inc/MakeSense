@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         height: '100%',
         width: '100%',
-        backgroundColor: '#292929',
+        backgroundColor: Colors.DARK_GRAY,
         opacity: 0.2,
     },
 });
