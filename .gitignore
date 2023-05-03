@@ -42,6 +42,7 @@ package-lock.json
 yarn.lock
 
 # ide files
+.vscode
 *.pbxuser
 !default.pbxuser
 *.mode1v3
