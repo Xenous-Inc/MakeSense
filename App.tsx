@@ -1,42 +1,10 @@
 import React, { useCallback } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { TaskCarousel } from '@components/TaskCarousel';
+import HomeScreen from '@screens/HomeScreen';
 
 SplashScreen.preventAutoHideAsync();
-
-const tasks = [
-    {
-        isCompleted: false,
-        title: 'Pack for the trip',
-        text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
-        folder: 'Journeys',
-        time: '21:30',
-    },
-    {
-        isCompleted: false,
-        title: 'Pack for the trip',
-        text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
-        folder: 'Journeys',
-        time: '21:30',
-    },
-    {
-        isCompleted: false,
-        title: 'Pack for the trip',
-        text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
-        folder: 'Journeys',
-        time: '21:30',
-    },
-    {
-        isCompleted: false,
-        title: 'Pack for the trip',
-        text: 'Don’t wait until the last minute! There are a lot of items to pack. Tap to see the list',
-        folder: 'Journeys',
-        time: '21:30',
-    },
-];
 
 export default function App() {
     const [areFontsLoaded] = useFonts({
@@ -58,18 +26,14 @@ export default function App() {
     }
 
     return (
-        <GestureHandlerRootView style={styles.wrapper} onLayout={onLayoutRootView}>
-            <TaskCarousel tasks={tasks} />
-        </GestureHandlerRootView>
+        <View style={styles.wrapper} onLayout={onLayoutRootView}>
+            <HomeScreen />
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 48,
-        padding: 16,
     },
 });
