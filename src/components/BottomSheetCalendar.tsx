@@ -70,25 +70,11 @@ export const BottomSheetCalendar: React.FC<IBottomSheetCalendarProps> = props =>
                                 container: {
                                     position: 'relative',
                                 },
-                                text: {
-                                    position: 'absolute',
-                                    left: -6,
-                                    right: -6,
-                                    top: -6,
-                                    bottom: -6,
-                                    width: 'auto',
-                                    height: 'auto',
-                                    backgroundColor: Colors.BLACK,
-                                    textAlign: 'center',
-                                    textAlignVertical: 'center',
-                                    aspectRatio: 1,
-                                    marginTop: 0,
-                                    borderRadius: 25,
-                                },
+                                text: styles.todayMark,
                             },
                         },
                     }}
-                    style={{ borderTopRightRadius: 15, borderTopLeftRadius: 15 }}
+                    style={styles.calendar}
                     firstDay={1}
                 />
             </BottomSheet>
@@ -103,5 +89,24 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: Colors.DARK_GRAY,
         opacity: 0.2,
+    },
+    calendar: {
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
+    },
+    todayMark: {
+        position: 'absolute',
+        left: -6,
+        right: -6,
+        top: -6,
+        bottom: -6,
+        width: 'auto',
+        height: 'auto',
+        backgroundColor: Colors.BLACK,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        aspectRatio: 1,
+        marginTop: 0,
+        borderRadius: 25,
     },
 });
