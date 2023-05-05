@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import HomeScreen from '@screens/HomeScreen';
 
 SplashScreen.preventAutoHideAsync();
@@ -24,11 +25,10 @@ export default function App() {
     if (!areFontsLoaded) {
         return null;
     }
-
     return (
-        <View style={styles.wrapper} onLayout={onLayoutRootView}>
+        <GestureHandlerRootView style={styles.wrapper} onLayout={onLayoutRootView}>
             <HomeScreen />
-        </View>
+        </GestureHandlerRootView>
     );
 }
 

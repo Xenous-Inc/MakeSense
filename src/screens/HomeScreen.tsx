@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View, Image } from 'react-native';
 import { TaskCard } from '@components/TaskCard';
 import { Colors } from '@styles/colors';
 import { Header } from '@components/Header';
+import { BottomSheetCalendar } from '@components/BottomSheetCalendar';
 
 const imageButton = {
     voiceOutline: require('@assets/icons/voice_outline_24.png'),
@@ -12,10 +13,11 @@ const imageButton = {
 };
 
 const HomeScreen: React.FC = () => {
+    const [isButtomSheetOpened, setIsButtomSheetOpened] = useState<boolean>(false);
     return (
         <View style={styles.wrapper}>
             <View style={styles.wrapper__header}>
-                <Header />
+                <Header onCalendarClick={() => setIsButtomSheetOpened(true)} />
             </View>
             <TaskCard
                 task={{
@@ -39,12 +41,16 @@ const HomeScreen: React.FC = () => {
             />
             <View style={styles.wrapper__content}>
                 <TouchableOpacity style={styles.content__plusButton}>
-                    <Image style={styles.img} source={imageButton.voiceOutLine} />
+                    <Image style={styles.img} source={imageButton.voiceOutline} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.content__voiceButton}>
                     <Image style={styles.img} source={imageButton.iconPlus} />
                 </TouchableOpacity>
             </View>
+            <BottomSheetCalendar
+                isBottomSheetOpen={isButtomSheetOpened}
+                setIsBottomSheetOpen={setIsButtomSheetOpened}
+            />
         </View>
     );
 };

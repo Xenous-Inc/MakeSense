@@ -24,7 +24,6 @@ export const Header: React.FC<IHeader> = props => {
 const styles = StyleSheet.create({
     wrapper: {
         width: '100%',
-        height: '100%',
         backgroundColor: Colors.WHITE,
         display: 'flex',
         flexDirection: 'row',
