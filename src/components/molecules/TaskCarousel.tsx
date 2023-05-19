@@ -36,8 +36,6 @@ export const TaskCarousel: React.FC<ITaskCarouselProps> = props => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '110%',
-        height: '100%',
-        paddingTop: 300,
+        width: '100%',
     },
 });

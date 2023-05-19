@@ -2,7 +2,8 @@ import React, { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 
 import { StyleSheet, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Calendar } from 'react-native-calendars';
-import CalendarHeader, { ICalendarHeaderProps } from './molecules/CalendarHeader';
+import CalendarHeader from 'react-native-calendars/src/calendar/header';
+import { ICalendarHeaderProps } from './CalendarHeader';
 import { Colors } from '@styles/colors';
 
 export interface IBottomSheetCalendarProps {
