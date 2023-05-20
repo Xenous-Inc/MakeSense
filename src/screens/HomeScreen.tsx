@@ -49,7 +49,9 @@ const tasks = [
 const HomeScreen: React.FC = () => {
     const date = new Date();
     const monthName = MONTHS[date.getMonth()].toLowerCase();
+
     const [isButtomSheetOpened, setIsButtomSheetOpened] = useState<boolean>(false);
+
     return (
         <View style={styles.content}>
             <View style={styles.content__header}>
@@ -59,19 +61,18 @@ const HomeScreen: React.FC = () => {
             <View style={styles.content__date}>
                 <Text style={styles.date__today}>Today</Text>
                 <Text style={styles.date__dayAndMonth}>
-                    {'   '}
                     {date.getDate()} {monthName}
                 </Text>
             </View>
-            <View style={styles.content__planCard}>
+            <View style={styles.content__cards}>
                 <PlanCard />
             </View>
             <View style={styles.content__buttons}>
-                <TouchableOpacity style={styles.button__plusButton}>
-                    <Image style={styles.buttons__img} source={imageButton.iconPlus} />
+                <TouchableOpacity style={styles.buttons__action}>
+                    <Image style={styles.action__img} source={imageButton.iconPlus} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button__voiceButton}>
-                    <Image style={styles.buttons__img} source={imageButton.voiceOutline} />
+                <TouchableOpacity style={styles.buttons__action}>
+                    <Image style={styles.action__img} source={imageButton.voiceOutline} />
                 </TouchableOpacity>
             </View>
             <BottomSheetCalendar
@@ -88,17 +89,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     content__header: {
-        width: '90%',
         marginTop: '10%',
-        marginLeft: '5%',
     },
-
     content__date: {
         flexDirection: 'row',
         fontFamily: 'OnestRegular',
         marginLeft: '7%',
         fontSize: 16,
-        bottom: '155%',
+        columnGap: 4,
     },
     date__today: {
         fontFamily: 'OnestRegular',
@@ -109,41 +107,27 @@ const styles = StyleSheet.create({
         fontFamily: 'OnestRegular',
         fontSize: 16,
     },
-    content__planCard: {
-        bottom: '68%',
-        left: '5%',
-    },
-    buttons__img: {
-        tintColor: Colors.WHITE,
-        width: 36,
-        height: 36,
+    content__cards: {
+        width: '100%',
     },
     content__buttons: {
+        position: 'absolute',
         width: '100%',
-        height: '200%',
-        flex: 5,
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop: '190%',
-        position: 'absolute',
+        columnGap: 20,
+        bottom: 40,
     },
-    button__voiceButton: {
+    buttons__action: {
         backgroundColor: Colors.BLACK,
+        paddingHorizontal: 36,
+        paddingVertical: 12,
         borderRadius: 100,
-        width: '29%',
-        height: '3.5%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        left: '1%',
     },
-    button__plusButton: {
-        backgroundColor: Colors.BLACK,
-        borderRadius: 100,
-        width: '29%',
-        height: '3.5%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        right: '1%',
+    action__img: {
+        tintColor: Colors.WHITE,
+        width: 32,
+        height: 32,
     },
 });
 

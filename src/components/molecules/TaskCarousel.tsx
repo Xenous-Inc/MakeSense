@@ -10,6 +10,7 @@ export interface ITaskCarouselProps {
 }
 
 const buttonColors = [Colors.BLUE, Colors.GREEN, Colors.YELLOW, Colors.PURPLE];
+
 export const TaskCarousel: React.FC<ITaskCarouselProps> = props => {
     const width = Dimensions.get('window').width;
 
@@ -23,12 +24,12 @@ export const TaskCarousel: React.FC<ITaskCarouselProps> = props => {
                 width={width}
                 data={props.tasks}
                 renderItem={renderSlide}
-                loop
                 mode={'parallax'}
                 modeConfig={{
                     parallaxScrollingScale: 0.9,
                     parallaxScrollingOffset: 44,
                 }}
+                loop
             />
         </View>
     );
@@ -37,5 +38,6 @@ export const TaskCarousel: React.FC<ITaskCarouselProps> = props => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
+        height: 180,
     },
 });
